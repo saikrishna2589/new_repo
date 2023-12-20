@@ -1,0 +1,3 @@
+Hello Sai. Are you staying focused with SQL adn Python?
+You have until end of Jan to complete Data Lemur and Python course 60 days
+Then after please start Data engineering

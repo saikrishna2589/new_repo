@@ -1,0 +1,21 @@
+[
+{
+  "question_text": "When was Darsh born?",
+  "options": [
+    "19th July 2023",
+    "19th June 2022",
+    "19th July 2022",
+    "19th June 2021"
+  ],
+  "correct_answer": 3
+},
+{"question_text": "What is Darsh Zodiac sign?",
+"options": ["Capricorn", "Gemini", "Cancer", "Taurus"],
+"correct_answer": 3
+},
+{
+"question_text": "What is Revathi's surname before marriage? ",
+"options": [" Annala", "Dasari ", "Sribashyam", "Bhattacharya"],
+"correct_answer": 3
+}
+]
