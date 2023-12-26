@@ -1,9 +1,6 @@
 
-import modules.Functions
-
-#installed earlier the package and import the package PySimpleGUI.
-#this contains the GUI
 import PySimpleGUI as sg
+
 
 # creating a text type .This creates a label on the Window
 label= sg.Text("Type in a to-do")
