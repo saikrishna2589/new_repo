@@ -8,3 +8,5 @@ focus mode
  I am not studing at night these days. try pushng 1 hr atleast early morning or nights after Darsh sleeps
 been_few_days_gap_since_i_last_logged_into+python
 hello.focushardsai.mom is great
+Master Python
+Master SQL
