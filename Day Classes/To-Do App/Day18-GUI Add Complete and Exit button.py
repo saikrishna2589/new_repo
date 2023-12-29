@@ -19,12 +19,19 @@ list_box = sg.Listbox(values=modules.Functions.get_todo_list(),
 
 edit_button = sg.Button("Edit")
 
+complete_button = sg.Button("Complete")
+
+exit_button=sg.Button("Exit")
+
 # creating a 'Window' instance
 # we are adding font ,which needs to be tuple . it has 2 arguments.
 
 
 view_window = sg.Window('My To-Do App',
-                        layout=[[label], [input_box, add_button], [list_box, edit_button]],
+                        layout=[[label],
+                                [input_box, add_button],
+                                [list_box, edit_button, complete_button],
+                                [exit_button]],
                         font=('Helvetica', 20))
 
 # applying the read method to the window instance.
@@ -87,6 +94,30 @@ while True:
 
         # whenever we select an item in the list box of GUI, we want to dsplay in the
         # input text box . To do this, we use the event value 'todos_existing'
+
+        case "Complete":
+            # extracting the string out of the list in the values['todos_existing] key
+            todo_to_complete = values['todos_existing'][0]
+
+            # gets current list of to-dos
+            todos = modules.Functions.get_todo_list()
+
+            # we use remove method ,which is a part of a list method
+            todos.remove(todo_to_complete)
+
+            modules.Functions.write_to_do_list(todos)
+
+            # updating the list box,which has a key 'todos_existing'
+            # dynamically once completed item is removed
+            view_window['todos_existing'].update(values=todos)
+
+            # updating the input box to get rid of the item from the inputbox display as well.
+            # input box has valur argument whilst listbox has 'values' argument
+            view_window['Todo'].update(value='')
+
+        case 'Exit':
+            break
+
         case 'todos_existing':
 
             # we are updating the current selection of user selection using values dictionary key 'todos_existing'and
@@ -103,5 +134,3 @@ while True:
             break
 
 view_window.close()
-
-
