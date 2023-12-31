@@ -15,7 +15,7 @@ label = sg.Text("Type in a to-do")
 # creating an inputtext instance
 input_box = sg.InputText(tooltip="Enter todo", key='Todo')
 
-add_button = sg.Button("Add")
+add_button = sg.Button("Add").
 
 # we want to edit the layout to firstly show list of all to-dos and then give user option to 'edit' the to-do from tje
 # List of to-dos
