@@ -3,11 +3,12 @@ import PySimpleGUI as sg
 import modules.Functions
 
 import time
+
 # creating an empty text instance first and later we will populate with current time based on when program was run.
 
-#GUI Theme
+# GUI Theme
 sg.theme("DarkGreen")
-clock = sg.Text('',key='clock')
+clock = sg.Text('', key='clock')
 
 # creating a text type .This creates a label on the Window
 label = sg.Text("Type in a to-do")
@@ -15,12 +16,17 @@ label = sg.Text("Type in a to-do")
 # creating an inputtext instance
 input_box = sg.InputText(tooltip="Enter todo", key='Todo')
 
-add_button = sg.Button("Add")
+add_button = sg.Button(size=0,
+                       image_source="Add.png",
+                       mouseover_colors="LightBlue2",
+                       tooltip="Add a to-do task",
+                       key="Add"
+                       )
 
 # we want to edit the layout to firstly show list of all to-dos and then give user option to 'edit' the to-do from tje
 # List of to-dos
 
-#size [45,10] is the size of 2 elements of the lsitbox.w=characters-wide, h=rows-high.i.ewidth of list box=45
+# size [45,10] is the size of 2 elements of the lsitbox.w=characters-wide, h=rows-high.i.ewidth 0of list box=45
 # # characters and 10 rows high in the list box.i.e it displays 10 elements of to-do before scrolling
 list_box = sg.Listbox(values=modules.Functions.get_todo_list(),
                       key='todos_existing',
@@ -28,7 +34,9 @@ list_box = sg.Listbox(values=modules.Functions.get_todo_list(),
 
 edit_button = sg.Button("Edit")
 
-complete_button = sg.Button("Complete")
+complete_button = sg.Button(image_source="complete.png",
+                            tooltip="removes the completed task",
+                            key="Complete")
 
 exit_button = sg.Button("Exit")
 
@@ -58,13 +66,13 @@ view_window = sg.Window('My To-Do App',
 
 while True:
 
-    #timeout=10 argument inside read method on windows gui helps to make the clock label available on GUI before anything is run
-    #else clock is visible only after a selection is made
-    #also timeout=10 would make the loop run every 200 milliseconds
-    #this continuos running of the loop will help to see the time every second in the display
+    # timeout=10 argument inside read method on windows gui helps to make the clock label available on GUI before anything is run
+    # else clock is visible only after a selection is made
+    # also timeout=10 would make the loop run every 200 milliseconds
+    # this continuos running of the loop will help to see the time every second in the display
     event, values = view_window.read(timeout=200)
 
-    #calling the strftime method to update the window['clock] label empty string with the time program was run
+    # calling the strftime method to update the window['clock] label empty string with the time program was run
     view_window['clock'].update(value=time.strftime("%b %d, %Y %H:%M:%S"))
 
     # now we rae ready to add match case statement

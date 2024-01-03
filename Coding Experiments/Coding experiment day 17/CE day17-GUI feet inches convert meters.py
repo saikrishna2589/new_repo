@@ -11,7 +11,10 @@ inputbox1 = sg.InputText(key='feet')
 inputbox2 = sg.InputText(key='inches')
 
 button = sg.Button("Convert")
+
+#creating empty text box to be updated at the end of the program when successfully run
 convert_to_meters = sg.Text(key='value_in_meters')
+
 gui = sg.Window("Converter", layout=[[textbox1, inputbox1], [textbox2, inputbox2], [button, convert_to_meters]])
 
 while True:
