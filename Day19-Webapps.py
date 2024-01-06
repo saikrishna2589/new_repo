@@ -15,7 +15,9 @@ todos=Functions.get_todo_list()
 
 #creating a custom function that is used in st.text_input(
 # on_change=add_todo) parameter.
-#this paramter helps webapp interact with user entries on the ap.
+#this paramter helps webapp interact with user entries on the app
+
+# Add feature
 def add_todo():
     # st.session_state is the key and value assosiated
     # with new to-do entered in the web app.
@@ -26,8 +28,6 @@ def add_todo():
     Functions.write_to_do_list(todos)
 
 
-
-
 import streamlit as st
 
 st.title("My Todo App")
@@ -36,8 +36,18 @@ st.subheader("This is my todo app.")
 st.write("This app is to increase your productivity")
 
 #creating checkboxes on webapp for each todo task
-for todo in todos:
-    st.checkbox(todo)
+#Adding a key='tod0' so it whenever we check the
+#tod0 on the app, the key value changes to true from
+#false. we can use this value in session state object
+# to add a complete
+for index,todo in enumerate(todos):
+   checkbox= st.checkbox(todo,key=todo)
+   if checkbox:
+      todos.pop(index)
+      Functions.write_to_do_list(todos)
+      del st.session_state[todo]
+      st.experimental_rerun()
+
 
 #creating a text box on the webapp
 # on_change parameter is a callbackfunction
