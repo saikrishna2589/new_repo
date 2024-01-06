@@ -20,7 +20,7 @@ if not os.path.exists("To_do_list.txt"):
 # next step what we did as one-off is to install the package 'pyinstaller'/ it bundles python app into single package
 # and it creates executable(.exec) files
 #GUI Theme
-sg.theme("DarkGreen")
+sg.theme("DarkTeal3")
 
 # creating an empty text instance first and later we will populate with current time based on when program was run.
 clock = sg.Text('',key='clock')
