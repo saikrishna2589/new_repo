@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 
 # this is to set configuration of streamlit page on website exto increase container size to fit text etc
 st.set_page_config(layout="wide")
@@ -29,3 +30,32 @@ st.write("  ")
 content2 = """Below are some of the Python apps I developed.Feel free to contact me!"""
 # writing text below the image object and description object
 st.write(content2)
+
+# creating 2 columns. storing each column object in a variable
+col3, col4 = st.columns(2)
+
+
+#using pandas to read the data file as it has the title, description, link and image of all the apps.
+pd.read_csv("data.csv",sep=';')
+
+
+#alternate method using with open(). but this method will read data as string and not parsed at delimiter
+# Pandas instead parses the csv in a tabular format in well strucuted way
+#with open("data.csv") as file:
+       # content=file.read()
+   
+#content
+
+df = pd.read_csv("data.csv",sep=';')
+
+# we use df.iterrows() method to loop through each row of dataframe
+# we only loop through 'title' column and write them on webpage
+
+with col3:
+    for index, row in df[:10].iterrows():
+        st.header(row["title"])
+
+
+with col4:
+    for index,row in df[10:].iterrows():
+        st.header(row["title"])
