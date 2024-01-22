@@ -31,8 +31,11 @@ content2 = """Below are some of the Python apps I developed.Feel free to contact
 # writing text below the image object and description object
 st.write(content2)
 
-# creating 2 columns. storing each column object in a variable
-col3, col4 = st.columns(2)
+# creating 3columns. storing each column object in a variable
+#the ratio 1.5,0.5,1.5 means 1st column will be 3 times the 2nd and so on.
+# we are creating empty col in between so the other 2 columns have enough space in between
+#on the website
+col3,empty_col, col4 = st.columns([1.5,0.5,1.5])
 
 
 #using pandas to read the data file as it has the title, description, link and image of all the apps.
@@ -52,10 +55,16 @@ df = pd.read_csv("data.csv",sep=';')
 # we only loop through 'title' column and write them on webpage
 
 with col3:
-    for index, row in df[:10].iterrows():
+    for  index,row in df[:10].iterrows():
         st.header(row["title"])
+        st.write(row["description"])
+        st.image("images/"+ row["image"])
+        st.write(f"[Source Code]({row['url']})")
 
 
 with col4:
     for index,row in df[10:].iterrows():
         st.header(row["title"])
+        st.write(row["description"])
+        st.image("images/" + row["image"])
+        st.write(f"[Source Code]({row['url']})")
