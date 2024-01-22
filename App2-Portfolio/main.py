@@ -7,10 +7,11 @@ st.set_page_config(layout="wide")
 col1, col2 = st.columns(2)
 
 # width in below will reduce the image size on th streamlit website
-
+# in col1 , we input image
 with col1:
     st.image("images/photo.jpg", width=450)
 
+# in column 2 we input description.using multi-line string
 with col2:
     st.title("Sai Krishna Samudrala")
     content = """With over a decade of experience in data analysis, predictive analytics, and data visualization, 
@@ -21,3 +22,10 @@ with col2:
 
     # # we can use st.write(content) as well but st.info(content) makes it looks prettier on website(background color)
     st.info(content)
+
+# giving some space after the container above
+st.write("  ")
+
+content2 = """Below are some of the Python apps I developed.Feel free to contact me!"""
+# writing text below the image object and description object
+st.write(content2)
