@@ -22,7 +22,7 @@ df = pd.read_csv("topics.csv")
 for index, row in df.iterrows():
     pdf.add_page()
 
-    #set the header
+    # set the header
     pdf.set_font(family="Times", style="B", size=24)
 
     # setting font to gray
@@ -31,8 +31,9 @@ for index, row in df.iterrows():
     # width =0 will stretch the cell to complete page. height =12 is hieght of cell
     pdf.cell(w=0, h=12, txt=row["Topic"])
 
-    # adding a line below .x1,y1 coordinates will be starting point and x2,y2 ending point
-    pdf.line(x1=10, y1=21, x2=200, y2=21)
+    # adding  lines below .x1,y1 coordinates will be starting point and x2,y2 ending point
+    for i in range(10, 270, 10):
+        pdf.line(x1=10, y1=11 + i, x2=200, y2=11 + i)
 
     # set the footer
     # here we are adding break line at 278mm height (A4 size total height is 298).we do this to add footer
@@ -47,6 +48,10 @@ for index, row in df.iterrows():
 
     for i in range(row["Pages"] - 1):
         pdf.add_page()
+
+        # add lines in extra pages per section
+        for j in range(10, 270, 10):
+            pdf.line(x1=10, y1=11 + j, x2=200, y2=11 + j)
 
         # set the footer for additional pages
         pdf.ln(275)
