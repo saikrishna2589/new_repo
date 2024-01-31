@@ -32,8 +32,8 @@ for index, row in df.iterrows():
     pdf.cell(w=0, h=12, txt=row["Topic"])
 
     # adding  lines below .x1,y1 coordinates will be starting point and x2,y2 ending point
-    for i in range(10, 270, 10):
-        pdf.line(x1=10, y1=11 + i, x2=200, y2=11 + i)
+    for y in range(10, 270, 10):
+        pdf.line(x1=10, y1=11 + y, x2=200, y2=11 + y)
 
     # set the footer
     # here we are adding break line at 278mm height (A4 size total height is 298).we do this to add footer
