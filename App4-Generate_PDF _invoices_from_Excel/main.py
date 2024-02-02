@@ -34,7 +34,7 @@ for filepath in file_paths:
     pdf.cell(w=50, h=8, txt=f"Date.{date}")
 
 
-    pdf.output(f"PDF_output/{filename}.pdf" )
+    pdf.output(f"PDF_output/{filename}.pdf")
 
 
 
