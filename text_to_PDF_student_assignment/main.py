@@ -21,10 +21,26 @@ for filepath in filepaths:
 
     #adding one page per file
     pdf.add_page()
+    pdf.set_font(family="Times",size=16,style="B")
+    pdf.set_text_color(80,80,80)
 
-    #giving the text as filename for each file i.e cat, dog etc
-    pdf.cell(w=50,h=8,txt=filename)
-    print(filename)
+    #giving the filename as text for each file i.e cat, dog etc
+    pdf.cell(w=50,h=8,txt=filename,ln=1)
+
+
+    #read the file contents
+    'df=pd.read_csv(filepath,sep='###',header=None)
+    with open(filepath,'r') as file:
+        contents=file.readlines()
+
+
+#using pdf.multi_cell method to read multiple lines in each file
+    pdf.set_font(family="Times",size=8)
+    pdf.set_text_color(80,80,80)
+    for content in contents:
+        pdf.multi_cell(w=0,h=8,txt=content)
+
+
 
     #only one output with multiple pages
 pdf.output("Output/output.pdf")
