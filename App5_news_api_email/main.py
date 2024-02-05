@@ -1,6 +1,7 @@
 
 #importing requests library to read apis for webpages
 import requests
+from email_automated import send_email
 
 #go to newsapi.org ,login and get the api_key
 api_key="4ab757abe0f042728570a4cfce6d64dc"
@@ -16,16 +17,14 @@ content_text=request.text
 
 #however if you want data in more structuted way such as dictionary , we use .json method on request object
 content_dict=request.json()
-'print(content_dict["articles"])'
-'print(len(content_dict["articles"]))'
 
-#content_dict is a dictionary and has articles as a key. the values are again a list of 100 items.
-# and each item has key value pairs
-"""for article in content_dict["articles"]:'
-       print(article["description"])"""
+body=""
 
 #getting each value in the list of 100 articles key by accessing the title key within each list
 for article in content_dict["articles"]:
-       print(article["title"])
+       if article["title"] is not None:
+              body=body+article["title"]+"\n"+article["description"]+2*"\n"
 
-
+#convert the string to udf-8 format before sending email
+body=body.encode("utf-8")
+send_email(message=body)
