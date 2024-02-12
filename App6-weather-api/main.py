@@ -34,6 +34,14 @@ def statation_date(station,date):
 if __name__=="__main__":
     app.run('debug=True')
 
+"""if __name__=="__main__":
+    app.run('debug=True',port=)"""
+"""if we are running multiple Flask apps, (here it is just one but incase), we can specify the default port.
+if not, port 5000 is the default and will be occupied by the first flask app.
+
+if __name__=="__main__":
+    app.run(port=5001) 
+    """
 
 # so basically we have a python file,in this case 'main.py' and it is managing multiple html files interactions through
 #FLASK web framework
