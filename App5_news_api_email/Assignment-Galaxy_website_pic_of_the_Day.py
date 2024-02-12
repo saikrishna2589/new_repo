@@ -19,7 +19,7 @@ image_url=data["url"]
 explanation=data["explanation"]
 
 #Download the image
-#write the response of the url content into the file
+#write the response of the url content into the file555554 tregd
 image_filepath="Img.png"
 response2=requests.get(image_url)
 with open (image_filepath,"wb") as file:

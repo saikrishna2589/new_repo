@@ -26,11 +26,17 @@ print(content["articles"])
 body = ""
 for article in content["articles"][0:20]:
     if article["title"] is not None:
-        body = "Subject: Today's news"\
-        +"\n"+ body + article["title"] \
+        article["title"] \
         + "\n" + str(article["description"]) \
         + "\n" + article["url"]+ 2*"\n"
 
 body = body.encode("utf-8")
 send_email(message=body)
 #this will send email
+
+"""
+ if you want subject as well in the email
+body = "Subject: Today's news" \
+       + "\n" + body + article["title"] \
+       + "\n" + str(article["description"]) \
+       + "\n" + article["url"] + 2 * "\n"""
