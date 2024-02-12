@@ -4,7 +4,7 @@
 from flask import Flask,render_template
 
 #Flask has website objects to represent websites similar to string,list object to represent series of data, etc
-app = Flask("Website")
+app = Flask(__name__)
 
 #Now we need to connect html pages with this website object.
 # whenever user clicks on home, "HTMLtutorial.html" page comes up.
@@ -16,19 +16,23 @@ app = Flask("Website")
 #The '@" symbol in @app.route(\"home) means '@'is a decorator and it connects the route method to the function home()
 
 
-@app.route("/home")
+@app.route("/")
 def home():
-    return render_template("HTMLtutorial.html")
+    return render_template("home.html")
 
 
-@app.route("/about/")
-def about():
-    return render_template("about.html")
+@app.route("/api/v1/<station>/<date>")
+def statation_date(station,date):
+    temperature=23
+    return {"Station": station,
+            "date": date,
+            "temperate": temperature}
 
 
 
 #debug argument true allows to see erros on the webpage
-app.run()
+if __name__=="__main__":
+    app.run('debug=True')
 
 
 # so basically we have a python file,in this case 'main.py' and it is managing multiple html files interactions through
