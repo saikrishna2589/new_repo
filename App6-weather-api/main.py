@@ -3,7 +3,12 @@
 #it is responsbile for ensuring multiple webpages interact correctly
 from flask import Flask,render_template
 
+
+import pandas as pd
 #Flask has website objects to represent websites similar to string,list object to represent series of data, etc
+
+#only if the __name__=="m__main__" , as in we are running the program where the syynax is written, we run the file.
+#if we import this function to another pythin file and run it, it wont run t
 app = Flask(__name__)
 
 #Now we need to connect html pages with this website object.
@@ -21,10 +26,17 @@ def home():
     return render_template("home.html")
 
 
+
 @app.route("/api/v1/<station>/<date>")
-def statation_date(station,date):
-    temperature=23
-    return {"Station": station,
+def station_date(station,date):
+
+    station=str(station).zfill(6)
+    filename ="data_small/TG_STAID"+ station+".txt"
+    df=pd.read_csv(filename,skiprows=20,parse_dates=["    DATE"])
+
+    chosen_row_and_date=df.loc[df["    DATE"]==date]
+    temperature=chosen_row_and_date['   TG'].squeeze()/10
+    return {"Station": station.lstrip('0'),
             "date": date,
             "temperate": temperature}
 
@@ -32,7 +44,7 @@ def statation_date(station,date):
 
 #debug argument true allows to see erros on the webpage
 if __name__=="__main__":
-    app.run('debug=True')
+    app.run()
 
 """if __name__=="__main__":
     app.run('debug=True',port=)"""
