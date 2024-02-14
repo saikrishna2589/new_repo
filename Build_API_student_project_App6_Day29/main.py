@@ -4,7 +4,7 @@ from flask import Flask,render_template
 import pandas as pd
 
 app = Flask(__name__)
-
+df= pd.read_csv(filename)
 # for default page without any parameters, user need to see the home.html
 
 @app.route("/")
@@ -16,12 +16,10 @@ def home():
 @app.route("/api/v1/<selected_word>")
 def word_definition(selected_word):
     filename="dictionary.csv"
-    df= pd.read_csv(filename)
-
     chosen_row =df.loc[df["word"]==str(selected_word).lower()]
     meaning= chosen_row["definition"].squeeze()
-    result = { "word":selected_word,"definition":meaning
-
+    result = { "word":selected_word,
+               "definition":meaning
                }
     return result
 

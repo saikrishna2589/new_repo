@@ -21,9 +21,19 @@ app = Flask(__name__)
 #The '@" symbol in @app.route(\"home) means '@'is a decorator and it connects the route method to the function home()
 
 
+stations=pd.read_csv("data_small/stations.txt",skiprows=17,delimiter=',')
+stations.columns=stations.columns.str.strip()
+stations_main=stations[["STAID","STANAME" ]]
+
+
+# in return, you want to return data variable on the website. but this page is connected to home.html page
+#so in home.html page, use special double curly bracket <p{{data}}</p to reflect the variable info on website
+#however as the html method ofthe dataframe variable data= stations_main.to_html()needs to be rendered properly on website, you tell flask a
+#command . so you give< p{{data|safe}}</p . this '|safe' will render the html format correctly
+print(stations_main)
 @app.route("/")
 def home():
-    return render_template("home.html")
+    return render_template("home.html",data=stations_main.to_html())
 
 
 
@@ -44,7 +54,7 @@ def station_date(station,date):
 
 #debug argument true allows to see erros on the webpage
 if __name__=="__main__":
-    app.run()
+    app.run(port=5002)
 
 """if __name__=="__main__":
     app.run('debug=True',port=)"""
