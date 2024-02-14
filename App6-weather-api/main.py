@@ -51,6 +51,36 @@ def station_date(station,date):
             "temperate": temperature}
 
 
+@app.route("/api/v1/<station_id>")
+def station_id(station_id):
+    station_id=str(station_id).zfill(6)
+    filename1=pd.read_csv("data_small/TG_STAID"+station_id+".txt",skiprows=20,parse_dates=["    DATE"])
+    filename2=filename1[["STAID"," SOUID","    DATE"]]
+    return render_template("home1.html",chosen_station=filename2.to_html())
+  # to show result on website in dictionary method. here we are not rendering any template but showing result directly.
+    #result=filename2.to_dict(orient="records")
+    #return result
+
+
+@app.route("/api/v1/yearly/<station_id>/<year>")
+def station_year(station_id,year):
+    station_id=str(station_id).zfill(6)
+    file=pd.read_csv("data_small/TG_STAID"+station_id+".txt",skiprows=20,parse_dates=["    DATE"])
+    #chaning date column date date type to string data type so as to apply string methods on it
+    file['    DATE'] = file['    DATE'].astype(str)
+    df=file.loc[file['    DATE'].str.startswith(str(year))]
+    return render_template("station_year.html",data1=df.to_html())
+    #returning dictionary instead
+    #result= df.to_dict(orient="records")
+    #return result
+
+
+
+
+
+
+
+
 
 #debug argument true allows to see erros on the webpage
 if __name__=="__main__":
