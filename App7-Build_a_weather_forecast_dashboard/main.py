@@ -1,6 +1,6 @@
 import streamlit as st
 import plotly.express as px
-# Custom CSS to inject into the Streamlit app to set the background to white
+import pandas as pd
 
 st.set_page_config(layout="wide")
 
@@ -14,26 +14,19 @@ option = st.selectbox("Select data to view",
 st.subheader(f"{option} for next {days} days in {place}")
 
 
-
 def get_data(days):
     dates =  ["2022-25-10", "2022-06-10", "2022-27-10"]
-    temperature=[10,11,33]
+    temperature = [10, 11, 33]
     temperature = [days * i for i in temperature]
     return dates, temperature
 
-d,t=get_data(days)
+dates, temperatures = get_data(days)
 
+# Create a DataFrame from the data
+data = pd.DataFrame({"Date": dates, "Temperature": temperatures})
 
-#x and y in the arguments needs to be arrays, for ex-list,tuple,
-# dataframe column, series object etc
-#labels object needs to be dictionary
+# Create a line plot using Plotly Express
+fig = px.line(data, x="Date", y="Temperature", title=f"{option} for next {days} days in {place}")
 
-#Plotly and Bokeh are figure objects that go into the input
-figure=px.area(x=d, y=t)
-
-#The above figure object needs to go inside plotly chart
-st.plotly_chart(figure)
-#other than line method , we have area, histogram, density heatmap, funnel, sctter
-#,pie etc .you can get these methiods by checking dir
-# of the plotly.express method
-#print(dir(px))
+# Show the Plotly figure using Streamlit
+st.plotly_chart(fig)
